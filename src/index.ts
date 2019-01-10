@@ -1,3 +1,5 @@
-export default myLib = (text: string): string {
-    return text;
-}
+const myLib = (text: string): string => {
+  return text;
+};
+
+export default myLib;
