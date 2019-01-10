@@ -15,6 +15,7 @@
   "devDependencies": {
     "commitizen": "^3.0.5",
     "cz-customizable": "^5.3.0",
+    "http-server": "^0.11.1",
     "rollup": "^1.1.0",
     "rollup-plugin-typescript2": "^0.18.1",
     "tslint": "^5.12.0",
@@ -25,6 +26,7 @@
     "lint": "tslint -c tslint.json \"src/**/*.ts\"",
     "lint:fix": "tslint --fix -c tslint.json \"src/**/*.ts\"",
     "clean": "rm -rf ./dist && mkdir dist",
-    "build": "yarn lint:fix && yarn clean && rollup --config"
+    "build": "yarn lint:fix && yarn clean && rollup --config",
+    "dev": "http-server -p 9001 -o"
   }
 }
