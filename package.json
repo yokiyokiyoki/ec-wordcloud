@@ -6,13 +6,15 @@
   "repository": "https://github.com/yokiyokiyoki/e-wordcloud.git",
   "author": "youjie <youjie@hudongpai.com>",
   "license": "MIT",
-  "dependencies": {
-    "commitizen": "^3.0.5",
-    "cz-customizable": "^5.3.0"
-  },
+  "dependencies": {},
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"
     }
+  },
+  "devDependencies": {
+    "commitizen": "^3.0.5",
+    "cz-customizable": "^5.3.0",
+    "typescript": "^3.2.2"
   }
 }
