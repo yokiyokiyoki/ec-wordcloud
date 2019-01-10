@@ -10,6 +10,19 @@ class EWordcloud {
    * setOption
    */
   public setOption(option) {}
+  /**
+   * resize
+   */
+  public resize() {}
+
+  /**
+   * showLoading
+   */
+  public showLoading() {}
+  /**
+   * hideLoading
+   */
+  public hideLoading() {}
 }
 
 export default myLib;
