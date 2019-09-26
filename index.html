@@ -2,9 +2,41 @@
 <html>
   <head>
     <title>测试</title>
+    <style>
+      .test{
+        height:300px;
+        width:300px;
+      }
+    </style>
   </head>
   <body>
+    <div class="test">11</div>
     11
-    <script src="./dist/myLib.js"></script>
+    <script src="./dist/ewordcloud.js"></script>
+    <script type="text/javascript">
+    let options={
+        "list": [
+            ['Google', 10],
+            ['Tencent', 9],
+            ['Alibaba', 7],
+            ['Baidu', 6],
+            ['NetEase', 4],
+            ['JD', 5],
+            ['Youku', 4],
+            ['Meituan', 3],
+            ['Douban', 3]
+        ],
+        "gridSize": 16, // size of the grid in pixels
+        "weightFactor": 10, // number to multiply for size of each word in the list
+        "fontWeight": 'normal', // 'normal', 'bold' or a callback
+        "fontFamily": 'Times, serif', // font to use
+        "color": 'random-light', // 'random-dark' or 'random-light'
+        "backgroundColor": '#333', // the color of canvas
+        "rotateRatio": 0 // probability for the word to rotate. 1 means always rotate
+    }
+    let test=document.querySelector('.test')
+    let app=new EWordcloud(test)
+    app.setOption(options)
+    </script>
   </body>
 </html>

@@ -6,8 +6,8 @@ export default {
   input: "src/index.ts",
   output: [
     {
-      name: "MyLib",
-      file: "dist/myLib.js",
+      name: "EWordcloud",
+      file: "dist/ewordcloud.js",
       format: "umd"
     }
   ],
