@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>测试</title>
+    <title>EWordcloud</title>
     <style>
       .test{
         height:300px;
@@ -15,6 +15,9 @@
     <script src="./dist/ewordcloud.js"></script>
     <script type="text/javascript">
     let options={
+      tooltip:{
+        show: true
+      },
         "list": [
             ['Google', 10],
             ['Tencent', 9],
@@ -26,6 +29,7 @@
             ['Meituan', 3],
             ['Douban', 3]
         ],
+        shape:'triangle',
         "gridSize": 16, // size of the grid in pixels
         "weightFactor": 10, // number to multiply for size of each word in the list
         "fontWeight": 'normal', // 'normal', 'bold' or a callback

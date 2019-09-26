@@ -1189,7 +1189,9 @@
 	    setOption(option) {
 	        this.$option = option;
 	        this.$option.fontFamily = this.$option.fontFamily || 'Microsoft YaHei,Helvetica,Times,serif';
+	        this.sortWorldCloud();
 	        this.fixWeightFactor(this.$option);
+	        this.setTooltip();
 	        this.$wordcloud = wordcloud2(this.$canvas, this.$option);
 	    }
 	    /**
@@ -1210,6 +1212,9 @@
 	        this.$canvas.width = width;
 	        this.$canvas.height = height;
 	        this.$wrapper.appendChild(this.$canvas);
+	    }
+	    sortWorldCloud() {
+	        this.$option.list && this.$option.list.sort((a, b) => b[1] - a[1]);
 	    }
 	    /**
 	     * 确定字体大小
@@ -1232,8 +1237,8 @@
 	            // 用y=ax^r+b公式确定字体大小
 	            if (max > min) {
 	                const r = typeof option.fontSizeFactor === 'number' ? option.fontSizeFactor : 1 / 10;
-	                let a = (option.maxFontSize - option.minFontSize) / (Math.pow(max, r) - Math.pow(min, r));
-	                let b = option.maxFontSize - a * Math.pow(max, r);
+	                const a = (option.maxFontSize - option.minFontSize) / (Math.pow(max, r) - Math.pow(min, r));
+	                const b = option.maxFontSize - a * Math.pow(max, r);
 	                option.weightFactor = (size) => {
 	                    return Math.ceil(a * Math.pow(size, r) + b);
 	                };
@@ -1243,6 +1248,57 @@
 	                    return option.minFontSize;
 	                };
 	            }
+	        }
+	    }
+	    /**
+	     * tooltips
+	     * 重新赋值hover
+	    */
+	    setTooltip() {
+	        const originHoverCb = this.$option.hover;
+	        const hoverCb = (item, dimension, event) => {
+	            console.log(item, dimension, event);
+	            if (item) {
+	                let html = item[0] + ': ' + item[1];
+	                if (typeof this.$option.tooltip.formatter === 'function') {
+	                    html = this.$option.tooltip.formatter(item);
+	                }
+	                this.$tooltip.innerHTML = html;
+	                this.$tooltip.style.top = (event.offsetY + 10) + 'px';
+	                this.$tooltip.style.left = (event.offsetX + 15) + 'px';
+	                this.$tooltip.style.display = 'block';
+	                this.$wrapper.style.cursor = 'pointer';
+	            }
+	            else {
+	                this.$tooltip.style.display = 'none';
+	                this.$wrapper.style.cursor = 'default';
+	            }
+	            originHoverCb && originHoverCb(item, dimension, event);
+	        };
+	        if (this.$option.tooltip && this.$option.tooltip.show === true) {
+	            if (!this.$tooltip) {
+	                this.$tooltip = window.document.createElement('div');
+	                this.$tooltip.className = '__wc_tooltip__';
+	                this.$tooltip.style.backgroundColor = this.$option.tooltip.backgroundColor || 'rgba(0, 0, 0, 0.701961)';
+	                this.$tooltip.style.color = '#fff';
+	                this.$tooltip.style.padding = '5px';
+	                this.$tooltip.style.borderRadius = '5px';
+	                this.$tooltip.style.fontSize = '12px';
+	                this.$tooltip.style.fontFamily = this.$option.fontFamily;
+	                this.$tooltip.style.lineHeight = 1.4;
+	                this.$tooltip.style.webkitTransition = 'left 0.2s, top 0.2s';
+	                this.$tooltip.style.mozTransition = 'left 0.2s, top 0.2s';
+	                this.$tooltip.style.transition = 'left 0.2s, top 0.2s';
+	                this.$tooltip.style.position = 'absolute';
+	                this.$tooltip.style.whiteSpace = 'nowrap';
+	                this.$tooltip.style.zIndex = 999;
+	                this.$tooltip.style.display = 'none';
+	                this.$wrapper.appendChild(this.$tooltip);
+	                this.$el.onmouseout = () => {
+	                    this.$tooltip.style.display = 'none';
+	                };
+	            }
+	            this.$option.hover = hoverCb;
 	        }
 	    }
 	}
