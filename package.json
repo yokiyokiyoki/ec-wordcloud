@@ -30,6 +30,9 @@
     "lint:fix": "tslint --fix -c tslint.json \"src/**/*.ts\"",
     "clean": "rm -rf ./dist && mkdir dist",
     "build": "yarn lint:fix && yarn clean && rollup --config",
-    "dev": "http-server -p 9001 -o"
+    "dev": "http-server -p 9001 -o",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.bash"
   }
 }

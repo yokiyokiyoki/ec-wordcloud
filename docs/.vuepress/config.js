@@ -3,7 +3,7 @@
 */
 module.exports = {
     // 网站部署路径，如果你想将你的网站部署到 https://foo.github.io/bar/，那么 base 应该被设置成 "/bar/"
-    base: "/develop-interview/", 
+    base: "/e-wordcloud/", 
     // 网站标题
     title: "EWordcloud指南", 
     // 网站描述
@@ -33,7 +33,7 @@ module.exports = {
           text: "GitHub",
           items: [
             // 外部链接
-            { text: "GitHub地址", link: "https://github.com/yokiyokiyoki/develop-interview" }
+            { text: "GitHub地址", link: "https://github.com/yokiyokiyoki/e-wordcloud" }
           ]
         }
       ],
@@ -53,33 +53,17 @@ module.exports = {
         title: "基础",
         collapsable: false,
         children: [
-          '','js-base','es6-base','js-async',"write-promise","event-loop","js-upgrade","browser-base","cache-base","render-base"
+          '','base'
         ]
       },
       {
         title: "深入",
         collapsable: false,
         children: [
-          'es6-base'
+          ''
         ]
       }
     ]
   }
   
-  function getQuestionSidebar(){
-    return [
-      {
-        title: "前端",
-        collapsable: false,
-        children: [
-          '',''
-        ]
-      },
-      {
-        title: "开放性问题",
-        collapsable: false,
-        children: ["open",
-        ]
-      }
-    ]
-  }
+  
