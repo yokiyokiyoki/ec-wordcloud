@@ -1189,10 +1189,15 @@
 	    setOption(option) {
 	        this.$option = option;
 	        this.$option.fontFamily = this.$option.fontFamily || 'Microsoft YaHei,Helvetica,Times,serif';
-	        this.sortWorldCloud();
+	        this.sortWorldCloudList();
 	        this.fixWeightFactor(this.$option);
 	        this.setTooltip();
-	        this.$wordcloud = wordcloud2(this.$canvas, this.$option);
+	        if (this.$option && /\.(jpg|png)$/.test(this.$option.imageShape)) {
+	            this.imageShape();
+	        }
+	        else {
+	            this.renderShape();
+	        }
 	    }
 	    /**
 	     * resize
@@ -1213,7 +1218,7 @@
 	        this.$canvas.height = height;
 	        this.$wrapper.appendChild(this.$canvas);
 	    }
-	    sortWorldCloud() {
+	    sortWorldCloudList() {
 	        this.$option.list && this.$option.list.sort((a, b) => b[1] - a[1]);
 	    }
 	    /**
@@ -1277,7 +1282,7 @@
 	        };
 	        if (this.$option.tooltip && this.$option.tooltip.show === true) {
 	            if (!this.$tooltip) {
-	                this.$tooltip = window.document.createElement('div');
+	                this.$tooltip = document.createElement('div');
 	                this.$tooltip.className = '__wc_tooltip__';
 	                this.$tooltip.style.backgroundColor = this.$option.tooltip.backgroundColor || 'rgba(0, 0, 0, 0.701961)';
 	                this.$tooltip.style.color = '#fff';
@@ -1301,7 +1306,92 @@
 	            this.$option.hover = hoverCb;
 	        }
 	    }
+	    /**
+	     * 图片遮罩
+	    */
+	    imageShape() {
+	        const img = window.document.createElement('img');
+	        img.crossOrigin = 'Anonymous';
+	        img.onload = () => {
+	            this.$maskCanvas = document.createElement('canvas');
+	            this.$maskCanvas.width = img.width;
+	            this.$maskCanvas.height = img.height;
+	            const ctx = this.$maskCanvas.getContext('2d');
+	            ctx.drawImage(img, 0, 0, img.width, img.height);
+	            const imageData = ctx.getImageData(0, 0, this.$maskCanvas.width, this.$maskCanvas.height);
+	            const newImageData = ctx.createImageData(imageData);
+	            for (let i = 0; i < imageData.data.length; i += 4) {
+	                const tone = imageData.data[i] +
+	                    imageData.data[i + 1] +
+	                    imageData.data[i + 2];
+	                const alpha = imageData.data[i + 3];
+	                if (alpha < 128 || tone > 128 * 3) {
+	                    // Area not to draw
+	                    newImageData.data[i] =
+	                        newImageData.data[i + 1] =
+	                            newImageData.data[i + 2] = 255;
+	                    newImageData.data[i + 3] = 0;
+	                }
+	                else {
+	                    // Area to draw
+	                    newImageData.data[i] =
+	                        newImageData.data[i + 1] =
+	                            newImageData.data[i + 2] = 0;
+	                    newImageData.data[i + 3] = 255;
+	                }
+	            }
+	            ctx.putImageData(newImageData, 0, 0);
+	            this.renderShape();
+	        };
+	        img.onerror = () => {
+	            this.renderShape();
+	        };
+	        img.src = this.$option.imageShape;
+	    }
+	    /**
+	     * 渲染形状遮罩
+	    */
+	    renderShape() {
+	        if (this.$maskCanvas) {
+	            this.$option.clearCanvas = false;
+	            /* Determine bgPixel by creating
+	             another canvas and fill the specified background color. */
+	            const bctx = document.createElement('canvas').getContext('2d');
+	            bctx.fillStyle = this.$option.backgroundColor || '#fff';
+	            bctx.fillRect(0, 0, 1, 1);
+	            const bgPixel = bctx.getImageData(0, 0, 1, 1).data;
+	            const maskCanvasScaled = window.document.createElement('canvas');
+	            maskCanvasScaled.width = this.$canvas.width;
+	            maskCanvasScaled.height = this.$canvas.height;
+	            let ctx = maskCanvasScaled.getContext('2d');
+	            ctx.drawImage(this.$maskCanvas, 0, 0, this.$maskCanvas.width, this.$maskCanvas.height, 0, 0, maskCanvasScaled.width, maskCanvasScaled.height);
+	            const imageData = ctx.getImageData(0, 0, maskCanvasScaled.width, maskCanvasScaled.height);
+	            const newImageData = ctx.createImageData(imageData);
+	            for (let i = 0; i < imageData.data.length; i += 4) {
+	                if (imageData.data[i + 3] > 128) {
+	                    newImageData.data[i] = bgPixel[0];
+	                    newImageData.data[i + 1] = bgPixel[1];
+	                    newImageData.data[i + 2] = bgPixel[2];
+	                    newImageData.data[i + 3] = bgPixel[3];
+	                }
+	                else {
+	                    // This color must not be the same w/ the bgPixel.
+	                    newImageData.data[i] = bgPixel[0];
+	                    newImageData.data[i + 1] = bgPixel[1];
+	                    newImageData.data[i + 2] = bgPixel[2];
+	                    newImageData.data[i + 3] = bgPixel[3] ? (bgPixel[3] - 1) : 1;
+	                }
+	            }
+	            ctx.putImageData(newImageData, 0, 0);
+	            ctx = this.$canvas.getContext('2d');
+	            ctx.clearRect(0, 0, this.$canvas.width, this.$canvas.height);
+	            ctx.drawImage(maskCanvasScaled, 0, 0);
+	        }
+	        wordcloud2(this.$canvas, this.$option);
+	    }
 	}
+	EWordcloud.isSupported = wordcloud2.isSupported;
+	EWordcloud.minFontSize = wordcloud2.minFontSize;
 
 	return EWordcloud;
 

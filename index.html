@@ -4,8 +4,8 @@
     <title>EWordcloud</title>
     <style>
       .test{
-        height:300px;
-        width:300px;
+        height:600px;
+        width:600px;
       }
     </style>
   </head>
@@ -14,11 +14,7 @@
     11
     <script src="./dist/ewordcloud.js"></script>
     <script type="text/javascript">
-    let options={
-      tooltip:{
-        show: true
-      },
-        "list": [
+    let list=[
             ['Google', 10],
             ['Tencent', 9],
             ['Alibaba', 7],
@@ -28,9 +24,22 @@
             ['Youku', 4],
             ['Meituan', 3],
             ['Douban', 3]
-        ],
-        shape:'triangle',
-        "gridSize": 16, // size of the grid in pixels
+        ]
+        for (var i = 0; i < 50; i++) {
+          list.push(['蛤蛤', 5])
+        }
+        for (var i = 0; i < 50; i++) {
+          list.push(['记者', 5])
+        }
+    let options={
+      tooltip:{
+        show: true
+      },
+       list,
+       ellipticity: 1,
+        // shape:'triangle',
+        imageShape:'https://liangbizhi.github.io/js2wordcloud/shape/twitter.png',
+        "gridSize": 6, // size of the grid in pixels
         "weightFactor": 10, // number to multiply for size of each word in the list
         "fontWeight": 'normal', // 'normal', 'bold' or a callback
         "fontFamily": 'Times, serif', // font to use
@@ -41,6 +50,10 @@
     let test=document.querySelector('.test')
     let app=new EWordcloud(test)
     app.setOption(options)
+
+
+    
+
     </script>
   </body>
 </html>
