@@ -8,8 +8,8 @@ export default {
   input: "src/index.ts",
   output: [
     {
-      name: "EWordcloud",
-      file: "dist/ewordcloud.js",
+      name: "ECWordcloud",
+      file: "dist/ec-wordcloud.js",
       format: "umd"
     }
   ],

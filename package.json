@@ -1,12 +1,14 @@
 {
-  "name": "e-wordcloud",
+  "name": "ec-wordcloud",
   "version": "0.0.1",
   "description": "echarts-like wordcloud component",
   "main": "index.js",
   "repository": "https://github.com/yokiyokiyoki/e-wordcloud.git",
-  "author": "youjie <youjie@hudongpai.com>",
+  "author": "youjie",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "ec-wordcloud": "^0.0.1"
+  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"

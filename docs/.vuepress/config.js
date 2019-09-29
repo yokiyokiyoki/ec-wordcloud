@@ -33,7 +33,7 @@ module.exports = {
           text: "GitHub",
           items: [
             // 外部链接
-            { text: "GitHub地址", link: "https://github.com/yokiyokiyoki/e-wordcloud" }
+            { text: "GitHub地址", link: "https://github.com/yokiyokiyoki/ec-wordcloud" }
           ]
         }
       ],
