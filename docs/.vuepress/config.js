@@ -3,9 +3,9 @@
 */
 module.exports = {
     // 网站部署路径，如果你想将你的网站部署到 https://foo.github.io/bar/，那么 base 应该被设置成 "/bar/"
-    base: "/e-wordcloud/", 
+    base: "/ec-wordcloud/", 
     // 网站标题
-    title: "EWordcloud指南", 
+    title: "ec-wordcloud指南", 
     // 网站描述
     description: "基于wordcloud2.js封装的插件", 
     // 注入到当前页面的 HTML <head> 中的标签
