@@ -1189,6 +1189,7 @@
 	    setOption(option) {
 	        this.$option = option;
 	        this.$option.fontFamily = this.$option.fontFamily || 'Microsoft YaHei,Helvetica,Times,serif';
+	        this.transformData();
 	        this.sortWorldCloudList();
 	        this.fixWeightFactor(this.$option);
 	        this.setTooltip();
@@ -1203,6 +1204,12 @@
 	     * resize
 	     */
 	    resize() {
+	        if (this.$option && /\.(jpg|png)$/.test(this.$option.imageShape)) {
+	            this.imageShape();
+	        }
+	        else {
+	            this.renderShape();
+	        }
 	    }
 	    init() {
 	        const width = this.$el.clientWidth;
@@ -1220,6 +1227,17 @@
 	    }
 	    sortWorldCloudList() {
 	        this.$option.list && this.$option.list.sort((a, b) => b[1] - a[1]);
+	    }
+	    /**
+	     * 将[{name:'aa',value:11}]转成[['aa',11]]
+	    */
+	    transformData() {
+	        if (this.$option.list)
+	            return;
+	        this.$option.list = [];
+	        this.$option.data && this.$option.data.length && this.$option.data.forEach((item) => {
+	            this.$option.list.push([item.name, item.value]);
+	        });
 	    }
 	    /**
 	     * 确定字体大小
@@ -1262,7 +1280,6 @@
 	    setTooltip() {
 	        const originHoverCb = this.$option.hover;
 	        const hoverCb = (item, dimension, event) => {
-	            console.log(item, dimension, event);
 	            if (item) {
 	                let html = item[0] + ': ' + item[1];
 	                if (typeof this.$option.tooltip.formatter === 'function') {
@@ -1283,7 +1300,7 @@
 	        if (this.$option.tooltip && this.$option.tooltip.show === true) {
 	            if (!this.$tooltip) {
 	                this.$tooltip = document.createElement('div');
-	                this.$tooltip.className = '__wc_tooltip__';
+	                this.$tooltip.className = '__ewc_tooltip__';
 	                this.$tooltip.style.backgroundColor = this.$option.tooltip.backgroundColor || 'rgba(0, 0, 0, 0.701961)';
 	                this.$tooltip.style.color = '#fff';
 	                this.$tooltip.style.padding = '5px';

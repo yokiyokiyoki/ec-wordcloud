@@ -53,16 +53,9 @@ module.exports = {
         title: "基础",
         collapsable: false,
         children: [
-          '','base'
+          'base'
         ]
       },
-      {
-        title: "深入",
-        collapsable: false,
-        children: [
-          ''
-        ]
-      }
     ]
   }
   
