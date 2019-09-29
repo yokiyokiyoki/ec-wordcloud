@@ -1,28 +1,32 @@
-## Install
+## 安装
 
 ```html
-<script src="ewordcloud.js"></script>
+<!--可以自己去npm查看版本号，修改之-->
+<script src="https://cdn.jsdelivr.net/npm/ec-wordcloud@0.0.3/dist/ec-wordcloud.js"></script>
+<!--ECWordcloud变为全局变量-->
 ```
 
 Or
 
 ```shell
-npm install ewordcloud
+npm install ec-wordcloud -S
+/** 或者推荐 **/
+yarn add ec-wordcloud -S
 ```
 
 ```js
-import ewordcloud from 'ewordcloud'
+import ECWordcloud from 'ec-wordcloud'
 ```
 
-## Usage
-> options更多请参考[wordcloud2](https://github.com/timdream/wordcloud2.js/blob/gh-pages/API.md)
+## 使用
+> option更多选项请参考[wordcloud2](https://github.com/timdream/wordcloud2.js/blob/gh-pages/API.md)
 
 ```js
-const wordcloud = new ewordcloud(document.querySelector('.wordcloud'));
+const wordcloud = new ECWordcloud(document.querySelector('.wordcloud'));
 
 wordcloud.setOption({
     // ...
-    maskImage: 'https://example.com/images/shape.png',     // 提供一张图片（链接方式，仅支持jpg/png），根据其形状进行词云渲染
+    maskImage: 'https://example.com/images/shape.png',     // 提供一张图片（链接方式，支持jpg/png），根据其形状进行词云渲染
     fontSizeFactor: 0.1,                                    // 词云权重系数，默认为0.1
     maxFontSize: 60,                                        // 最大fontSize，用来控制weightFactor，默认60
     minFontSize: 12,                                        // 最小fontSize，用来控制weightFactor，默认12
@@ -35,13 +39,13 @@ wordcloud.setOption({
     data:[{
         name:'测试1',value:11
     },{
-        name:'测试2',value:11
+        name:'测试2',value:12
     }]
     // ...其余请参考wordcloud2.js
 });
 ```
 
-### methods
+### 方法
 
 #### resize
 
@@ -49,7 +53,7 @@ wordcloud.setOption({
 wordcloud.resize()
 ```
 
-### Notice
+### 注意
 
 更好地支持图片形状，注意点：
 - 请使用图形为纯黑色的白底图片（格式为jpg/png）；

@@ -2,13 +2,12 @@
 
 [文档](https://yokiyokiyoki.github.io/e-wordcloud/)
 
-## Install
+## 安装
 
 ```html
-<script src="ec-wordcloud.js"></script>
-<script>
+<!--可以自己去npm查看版本号，修改之-->
+<script src="https://cdn.jsdelivr.net/npm/ec-wordcloud@0.0.3/dist/ec-wordcloud.js"></script>
 <!--ECWordcloud变为全局变量-->
-</script>
 ```
 
 Or
@@ -23,7 +22,7 @@ yarn add ec-wordcloud -S
 import ECWordcloud from 'ec-wordcloud'
 ```
 
-## Usage
+## 使用
 > options更多请参考[wordcloud2](https://github.com/timdream/wordcloud2.js/blob/gh-pages/API.md)
 
 ```js

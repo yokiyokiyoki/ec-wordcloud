@@ -1,6 +1,6 @@
 {
   "name": "ec-wordcloud",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "echarts-like wordcloud component",
   "main": "index.js",
   "repository": "https://github.com/yokiyokiyoki/ec-wordcloud.git",

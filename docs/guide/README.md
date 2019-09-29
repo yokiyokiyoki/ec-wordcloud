@@ -1,3 +1,3 @@
-# 指南
+# 快速使用
 
-介绍
+基于echarts风格的wordcloud2.js封装词云插件
