@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.EWordcloud = factory());
+	(global = global || self, global.ECWordcloud = factory());
 }(this, function () { 'use strict';
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -1193,7 +1193,7 @@
 	        this.sortWorldCloudList();
 	        this.fixWeightFactor(this.$option);
 	        this.setTooltip();
-	        if (this.$option && /\.(jpg|png)$/.test(this.$option.imageShape)) {
+	        if (this.$option && /\.(jpg|png)$/.test(this.$option.maskImage)) {
 	            this.imageShape();
 	        }
 	        else {
@@ -1204,7 +1204,7 @@
 	     * resize
 	     */
 	    resize() {
-	        if (this.$option && /\.(jpg|png)$/.test(this.$option.imageShape)) {
+	        if (this.$option && /\.(jpg|png)$/.test(this.$option.maskImage)) {
 	            this.imageShape();
 	        }
 	        else {
@@ -1363,7 +1363,7 @@
 	        img.onerror = () => {
 	            this.renderShape();
 	        };
-	        img.src = this.$option.imageShape;
+	        img.src = this.$option.maskImage;
 	    }
 	    /**
 	     * 渲染形状遮罩
