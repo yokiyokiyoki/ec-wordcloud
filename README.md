@@ -1,28 +1,33 @@
-# e-wordcloud
+# ec-wordcloud
 
 [文档](https://yokiyokiyoki.github.io/e-wordcloud/)
 
 ## Install
 
 ```html
-<script src="ewordcloud.js"></script>
+<script src="ec-wordcloud.js"></script>
+<script>
+<!--ECWordcloud变为全局变量-->
+</script>
 ```
 
 Or
 
 ```shell
-npm install ewordcloud
+npm install ec-wordcloud -S
+/** 或者推荐 **/
+yarn add ec-wordcloud -S
 ```
 
 ```js
-import ewordcloud from 'ewordcloud'
+import ECWordcloud from 'ec-wordcloud'
 ```
 
 ## Usage
 > options更多请参考[wordcloud2](https://github.com/timdream/wordcloud2.js/blob/gh-pages/API.md)
 
 ```js
-const wordcloud = new ewordcloud(document.querySelector('.wordcloud'));
+const wordcloud = new ECWordcloud(document.querySelector('.wordcloud'));
 
 wordcloud.setOption({
     // ...
